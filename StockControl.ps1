@@ -1,4 +1,4 @@
- #Declare Servername, DatabaseName and Credentials
+#Declare Servername, DatabaseName and Credentials
 $ServerName = 'localhost'
 $DatabaseName = 'stockControl'
 $userName = 'powerUser'
