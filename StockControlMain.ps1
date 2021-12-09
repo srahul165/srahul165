@@ -1,5 +1,5 @@
 #Import modules
-import-module sqlserver
+#import-module sqlserver
 
 #Declare Servername, DatabaseName and Credentials
 $ServerName = 'localhost'
@@ -11,7 +11,45 @@ $password = 'Pa55w.rd'
 $connectionString = 'Data Source={0};database={1};User ID={2};Password={3}' -f $ServerName,$DatabaseName,$userName,$password
 $sqlConnection = New-Object System.Data.SqlClient.SqlConnection $connectionString
 $sqlConnection.Open()
-Write-Host "Sql Connection opened successfully!!"
+#Write-Host "Sql Connection opened successfully!!"
+
+#CSS
+$HtmlHead = '<style>
+    body {
+        background-color: white;
+        font-family:      "Calibri";
+    }
+
+    table {
+        border-width:     1px;
+        border-style:     solid;
+        border-color:     black;
+        border-collapse:  collapse;
+        width:            100%;
+    }
+
+    th {
+        border-width:     1px;
+        padding:          5px;
+        border-style:     solid;
+        border-color:     black;
+        background-color: #98C6F3;
+    }
+
+    td {
+        border-width:     1px;
+        padding:          5px;
+        border-style:     solid;
+        border-color:     black;
+        background-color: White;
+    }
+
+    tr {
+        text-align:       left;
+    }
+</style>'
+
+######################## START OF PROGRAM - ALL CODE AFTER THIS LINE AS SQL CONNECTION HAS BEEN ESTABLISHED #######################
 
 do
  {
@@ -36,11 +74,12 @@ do
  until ($selection -eq 'Q')
 
 
-#Function to display the Initial View Add Delete menu
+###### Function to display the Initial View Add Delete menu ###### 
 function viewAddDelSCMenu
 {
+    [CmdletBinding()]
     param (
-        [string]$Title = 'Welcome to the Stock Control'
+        [string]$Title = 'Welcome to Stock Control'
     )
     Clear-Host
     Write-Host "========== $Title =========="
@@ -53,9 +92,10 @@ function viewAddDelSCMenu
     Write-Host "Q: Press 'Q' to EXIT"
 }
 
-# OPTION 1 - Function to display the Stock Control View Menu
+###### OPTION 1 - Function to display the Stock Control View Menu ######
 function showStockControlViewMenu
 {
+    [CmdletBinding()]
     param (
         [string]$Title = 'Welcome to the Stock Control'
     )
@@ -164,9 +204,10 @@ function showStockControlViewMenu
      until ($selection -eq 'Q')
 }
 
-# OPTION 2 - Function to display the Stock Control Add Menu
+###### OPTION 2 - Function to display the Stock Control Add Menu ######
 function showStockControlAddMenu
 {
+    [CmdletBinding()]
     param (
         [string]$Title = 'Welcome to the Stock Control'
     )
@@ -276,9 +317,10 @@ function showStockControlAddMenu
      until ($selection -eq 'Q')
 }
 
-# OPTION 3 - Function to display the Stock Control Delete Menu
+###### OPTION 3 - Function to display the Stock Control Delete Menu ######
 function showStockControlDeleteMenu
 {
+    [CmdletBinding()]
     param (
         [string]$Title = 'Welcome to the Stock Control'
     )
@@ -387,11 +429,10 @@ function showStockControlDeleteMenu
      until ($selection -eq 'Q')
 }
 
-# OPTION 4 - Function to generate a consolidated customer report in HTML format
+###### OPTION 4 - Function to generate a consolidated customer report in HTML format ######
 function generateCustomerReportAsHtml
 {
-    Write-Host "Inside generateCustomerReportAsHtml"
-
+    [CmdletBinding()]
     $sqlCommand = New-Object System.Data.SqlClient.SqlCommand
     $sqlCommand.Connection = $sqlConnection
     $getPathQuery = “SELECT BrigadeName AS 'Brigade Name', DodaacId AS 'DODAAC Id', DodaacPath AS 'File Path' FROM dbo.StockControlCustData ORDER BY BrigadeName ASC”
@@ -404,15 +445,15 @@ function generateCustomerReportAsHtml
 
     ##Return all of the rows and pipe it into the ConvertTo-HTML cmdlet, and then pipe that into our output file
     $OutputFile = 'H:\My Drive\My M@cBo0K Pr0\EDUCATION\MSSA - Army\Projects\customerReport.html'
-    $dataSet.Tables | Select-Object -Expand Rows | ConvertTo-HTML -head $a –body $body | Out-File $OutputFile
+    $dataSet.Tables | Select-Object -Expand Rows | ConvertTo-HTML -Title "STOCK CONTROL - Customer Report" -Head $HtmlHead | Out-File $OutputFile
 
     [System.Windows.MessageBox]::Show('Customer Report HTML generated successfully!!')
 }
 
+###### OPTION 5 - Function to generate a consolidated customer report in CSV format ######
 function generateCustomerReportAsCsv
 {
-    Write-Host "Inside generateCustomerReportAsCsv"
-
+    [CmdletBinding()]
     $sqlCommand = New-Object System.Data.SqlClient.SqlCommand
     $sqlCommand.Connection = $sqlConnection
     $getPathQuery = “SELECT BrigadeName AS 'Brigade Name', DodaacId AS 'DODAAC Id', DodaacPath AS 'File Path', IsValid as 'Is it Valid?' FROM dbo.StockControlCustData ORDER BY BrigadeName ASC”
@@ -430,9 +471,10 @@ function generateCustomerReportAsCsv
     [System.Windows.MessageBox]::Show('Customer Report CSV generated successfully!!')
 }
 
-#Function to get path to pdf and open pdf
+###### Function to get path to pdf and open pdf ######
 function viewDodaacPdf
 {
+    [CmdletBinding()]
     $sqlCommand = New-Object System.Data.SqlClient.SqlCommand
     $sqlCommand.Connection = $sqlConnection
     $getPathQuery = “SELECT DodaacPath FROM dbo.StockControlCustData WHERE DodaacId='$DODAAC' and IsValid='Y'”
@@ -451,9 +493,10 @@ function viewDodaacPdf
     }    
 }
 
-#Function to get path to pdf and add pdf
+###### Function to get path to pdf and add pdf ######
 function addDodaacPdf
 {
+    [CmdletBinding()]
     $sqlCommand = New-Object System.Data.SqlClient.SqlCommand
     $sqlCommand.Connection = $sqlConnection
     $getPathQuery = “SELECT DodaacPath FROM dbo.StockControlCustData WHERE DodaacId='$DODAAC'”
@@ -472,9 +515,10 @@ function addDodaacPdf
     }    
 }
 
-#Function to get path to pdf and delete pdf
+###### Function to get path to pdf and delete pdf ######
 function deleteDodaacPdf
 {
+    [CmdletBinding()]
     $sqlCommand = New-Object System.Data.SqlClient.SqlCommand
     $sqlCommand.Connection = $sqlConnection
     #$sqlCommand.CommandTimeout = 600000
@@ -486,8 +530,7 @@ function deleteDodaacPdf
 ###### Function to check if the entered DODAAC is valid and if it corresponds to the right brigade ######
 function checkIfValidDodaac
 {
-    Write-Output "Inside checkIfValidDodaac"
-
+    [CmdletBinding()]
     $sqlCommand = New-Object System.Data.SqlClient.SqlCommand
     $sqlCommand.Connection = $sqlConnection
     $getPathQuery = “SELECT DodaacPath FROM dbo.StockControlCustData sc  WHERE sc.DodaacId IN (SELECT DodaacId FROM  StockControlCustData sc1 WHERE sc1.DodaacId = '$DODAAC' AND sc1.BrigadeName LIKE '$brigade%' AND sc1.IsValid = 'Y')”
@@ -503,11 +546,10 @@ function checkIfValidDodaac
     else {
         $output = Write-Output "Please enter a valid DODAAC for $brigade" $dodaacPathToPdf
     }
-    Write-Output "Exiting checkIfValidDodaac"
 }
 
 ######################## ADD ALL CODE BEFORE THIS LINE AS THE LAST STEP IS CLOSING ANY OPEN SQL CONNECTIONS #######################
 
 #Close SQL Connection
 $sqlConnection.Close()
-Write-Host "Sql Connection closed successfully!!"
+#Write-Host "Sql Connection closed successfully!!"
