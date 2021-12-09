@@ -77,7 +77,7 @@ do
 ###### Function to display the Initial View Add Delete menu ###### 
 function viewAddDelSCMenu
 {
-    [CmdletBinding()]
+    #[CmdletBinding()]
     param (
         [string]$Title = 'Welcome to Stock Control'
     )
@@ -95,7 +95,7 @@ function viewAddDelSCMenu
 ###### OPTION 1 - Function to display the Stock Control View Menu ######
 function showStockControlViewMenu
 {
-    [CmdletBinding()]
+    #[CmdletBinding()]
     param (
         [string]$Title = 'Welcome to the Stock Control'
     )
@@ -207,7 +207,7 @@ function showStockControlViewMenu
 ###### OPTION 2 - Function to display the Stock Control Add Menu ######
 function showStockControlAddMenu
 {
-    [CmdletBinding()]
+    #[CmdletBinding()]
     param (
         [string]$Title = 'Welcome to the Stock Control'
     )
@@ -234,7 +234,7 @@ function showStockControlAddMenu
                 do
                 {   
                     try {
-                        [ValidatePattern('^[a-zA-Z0-9]{6}$')] $DODAAC = Read-Host "Enter a valid 7th ID DODAAC"
+                        [ValidatePattern('^[a-zA-Z0-9]{6}$')] $DODAAC = Read-Host "Enter a valid 7th ID DODAAC and make sure to place the NEW file under the ADDDD folder"
                         $brigade = '7th'
                         checkIfValidDodaac
                         } catch {}
@@ -244,7 +244,7 @@ function showStockControlAddMenu
                 do
                 {   
                     try {
-                        [ValidatePattern('^[a-zA-Z0-9]{6}$')] $DODAAC = Read-Host "Enter a valid 17th FAB DODAAC"
+                        [ValidatePattern('^[a-zA-Z0-9]{6}$')] $DODAAC = Read-Host "Enter a valid 17th FAB DODAAC and make sure to place the NEW file under the ADDDD folder"
                         $brigade = '17th'
                         checkIfValidDodaac
                         } catch {}
@@ -254,7 +254,7 @@ function showStockControlAddMenu
                 do
                 {   
                     try {
-                        [ValidatePattern('^[a-zA-Z0-9]{6}$')] $DODAAC = Read-Host "Enter a valid 42nd MP DODAAC" 
+                        [ValidatePattern('^[a-zA-Z0-9]{6}$')] $DODAAC = Read-Host "Enter a valid 42nd MP DODAAC and make sure to place the NEW file under the ADDDD folder" 
                         $brigade = '42nd'
                         checkIfValidDodaac
                         } catch {}
@@ -264,7 +264,7 @@ function showStockControlAddMenu
                 do
                 {   
                     try {
-                        [ValidatePattern('^[a-zA-Z0-9]{6}$')] $DODAAC = Read-Host "Enter a valid 62nd MD DODAAC"
+                        [ValidatePattern('^[a-zA-Z0-9]{6}$')] $DODAAC = Read-Host "Enter a valid 62nd MD DODAAC and make sure to place the NEW file under the ADDDD folder"
                         $brigade = '62nd'
                         checkIfValidDodaac
                         } catch {}
@@ -274,7 +274,7 @@ function showStockControlAddMenu
                 do
                 {   
                     try {
-                        [ValidatePattern('^[a-zA-Z0-9]{6}$')] $DODAAC = Read-Host "Enter a valid 201st EMIB DODAAC"
+                        [ValidatePattern('^[a-zA-Z0-9]{6}$')] $DODAAC = Read-Host "Enter a valid 201st EMIB DODAAC and make sure to place the NEW file under the ADDDD folder"
                         $brigade = '201st'
                         checkIfValidDodaac
                         } catch {}
@@ -284,7 +284,7 @@ function showStockControlAddMenu
                 do
                 {   
                     try {
-                        [ValidatePattern('^[a-zA-Z0-9]{6}$')] $DODAAC = Read-Host "Enter a valid 555th EN DODAAC"
+                        [ValidatePattern('^[a-zA-Z0-9]{6}$')] $DODAAC = Read-Host "Enter a valid 555th EN DODAAC and make sure to place the NEW file under the ADDDD folder"
                         $brigade = '555th'
                         checkIfValidDodaac
                         } catch {}
@@ -294,7 +294,7 @@ function showStockControlAddMenu
                 do
                 {   
                     try {
-                        [ValidatePattern('^[a-zA-Z0-9]{6}$')] $DODAAC = Read-Host "Enter a valid 593rd ESC DODAAC"
+                        [ValidatePattern('^[a-zA-Z0-9]{6}$')] $DODAAC = Read-Host "Enter a valid 593rd ESC DODAAC and make sure to place the NEW file under the ADDDD folder"
                         $brigade = '593rd'
                         checkIfValidDodaac
                         } catch {}
@@ -304,7 +304,7 @@ function showStockControlAddMenu
                 do
                 {   
                     try {
-                        [ValidatePattern('^[a-zA-Z0-9]{6}$')] $DODAAC = Read-Host "Enter a valid ICorps DODAAC"
+                        [ValidatePattern('^[a-zA-Z0-9]{6}$')] $DODAAC = Read-Host "Enter a valid ICorps DODAAC and make sure to place the NEW file under the ADDDD folder"
                         $brigade = 'ICorps'
                         checkIfValidDodaac
                         } catch {}
@@ -320,7 +320,7 @@ function showStockControlAddMenu
 ###### OPTION 3 - Function to display the Stock Control Delete Menu ######
 function showStockControlDeleteMenu
 {
-    [CmdletBinding()]
+    #[CmdletBinding()]
     param (
         [string]$Title = 'Welcome to the Stock Control'
     )
@@ -432,7 +432,7 @@ function showStockControlDeleteMenu
 ###### OPTION 4 - Function to generate a consolidated customer report in HTML format ######
 function generateCustomerReportAsHtml
 {
-    [CmdletBinding()]
+    #[CmdletBinding()]
     $sqlCommand = New-Object System.Data.SqlClient.SqlCommand
     $sqlCommand.Connection = $sqlConnection
     $getPathQuery = “SELECT BrigadeName AS 'Brigade Name', DodaacId AS 'DODAAC Id', DodaacPath AS 'File Path' FROM dbo.StockControlCustData ORDER BY BrigadeName ASC”
@@ -453,7 +453,7 @@ function generateCustomerReportAsHtml
 ###### OPTION 5 - Function to generate a consolidated customer report in CSV format ######
 function generateCustomerReportAsCsv
 {
-    [CmdletBinding()]
+    #[CmdletBinding()]
     $sqlCommand = New-Object System.Data.SqlClient.SqlCommand
     $sqlCommand.Connection = $sqlConnection
     $getPathQuery = “SELECT BrigadeName AS 'Brigade Name', DodaacId AS 'DODAAC Id', DodaacPath AS 'File Path', IsValid as 'Is it Valid?' FROM dbo.StockControlCustData ORDER BY BrigadeName ASC”
@@ -471,10 +471,10 @@ function generateCustomerReportAsCsv
     [System.Windows.MessageBox]::Show('Customer Report CSV generated successfully!!')
 }
 
-###### Function to get path to pdf and open pdf ######
+###### Function to get path to pdf and VIEW pdf ######
 function viewDodaacPdf
 {
-    [CmdletBinding()]
+    #[CmdletBinding()]
     $sqlCommand = New-Object System.Data.SqlClient.SqlCommand
     $sqlCommand.Connection = $sqlConnection
     $getPathQuery = “SELECT DodaacPath FROM dbo.StockControlCustData WHERE DodaacId='$DODAAC' and IsValid='Y'”
@@ -493,32 +493,81 @@ function viewDodaacPdf
     }    
 }
 
-###### Function to get path to pdf and add pdf ######
+###### Function to get path to pdf and ADD pdf ######
 function addDodaacPdf
 {
-    [CmdletBinding()]
+    #[CmdletBinding()]
     $sqlCommand = New-Object System.Data.SqlClient.SqlCommand
     $sqlCommand.Connection = $sqlConnection
-    $getPathQuery = “SELECT DodaacPath FROM dbo.StockControlCustData WHERE DodaacId='$DODAAC'”
-    $sqlCommand.CommandText = $getPathQuery
-
+    
+    #Get ADD folder path
+    $getAddFolderPathFromConfig = “SELECT FolderPath FROM dbo.StockControlConfig WHERE Name = 'Add Files'”
+    $sqlCommand.CommandText = $getAddFolderPathFromConfig    
     $sqlAdapter = New-Object System.Data.SqlClient.SqlDataAdapter $sqlCommand
     $dataSet = New-Object System.Data.DataSet
-    $sqlAdapter.Fill($dataSet) | Out-Null
-    ####### NEED TO FIX NULL ARRAY ISSUE if an unknown DODAAC is entered #######
-    if ($dataSet.Tables.rows["DodaacPath"] -eq $null){
-        Write-Output "Please enter a different DODAAC. No signature card associated with:"$DODAAC
+    $sqlAdapter.Fill($dataSet) | Out-Null    
+    $addFolderPathFromConfig = $dataSet.Tables.rows["FolderPath"]
+    #Write-Output "Inside addDodaacPdf - ADDDDD folder path is $addFolderPathFromConfig"
+
+    #Get ARCHIVE folder path
+    $getArchiveFolderPathFromConfig = “SELECT FolderPath FROM dbo.StockControlConfig WHERE Name = 'Archive'”
+    $sqlCommand.CommandText = $getArchiveFolderPathFromConfig    
+    $sqlAdapter = New-Object System.Data.SqlClient.SqlDataAdapter $sqlCommand
+    $dataSet = New-Object System.Data.DataSet
+    $sqlAdapter.Fill($dataSet) | Out-Null    
+    $archiveFolderPathFromConfig = $dataSet.Tables.rows["FolderPath"]
+    #Write-Output "Inside addDodaacPdf - ARCHIVEEEE folder path is $archiveFolderPathFromConfig"
+
+    #Get folder path based on DODAAC to move the file from the ADD folder
+    $getFolderPathFromConfig = “SELECT FolderPath FROM dbo.StockControlConfig WHERE Name IN (SELECT BrigadeName FROM dbo.StockControlCustData WHERE DodaacId='$DODAAC')”
+    $sqlCommand.CommandText = $getFolderPathFromConfig    
+    $sqlAdapter = New-Object System.Data.SqlClient.SqlDataAdapter $sqlCommand
+    $dataSet = New-Object System.Data.DataSet
+    $sqlAdapter.Fill($dataSet) | Out-Null    
+    $destFolderPathFromConfig = $dataSet.Tables.rows["FolderPath"]
+    #Write-Output "Inside addDodaacPdf - folder path is $destFolderPathFromConfig"
+
+    #Get folder path based on DODAAC to move the file from the ADD folder
+    $getFolderPathFromConfig = “SELECT BrigadeName, DodaacPath FROM dbo.StockControlCustData WHERE DodaacId ='$DODAAC'”
+    $sqlCommand.CommandText = $getFolderPathFromConfig    
+    $sqlAdapter = New-Object System.Data.SqlClient.SqlDataAdapter $sqlCommand
+    $dataSet = New-Object System.Data.DataSet
+    $sqlAdapter.Fill($dataSet) | Out-Null    
+    $brigadeName = $dataSet.Tables.rows["BrigadeName"]
+    $dodaacPath = $dataSet.Tables.rows["DodaacPath"]
+    #Write-Output "Inside addDodaacPdf - Brigade name is $brigadeName and Dodaacpath is $dodaacPath"
+
+    # 1: Insert record into StockControlCustData based on the Dodaac
+    $insertSCCustData = “INSERT INTO dbo.StockControlCustData (BrigadeName,DodaacId,DodaacPath,IsValid) VALUES ('$brigadeName','$DODAAC','$dodaacPath','Y')”
+    $sqlCommand.CommandText = $insertSCCustData
+    $sqlCommand.ExecuteNonQuery()
+
+    # 2: Move file from ADDDD folder to the Brigade folder
+        
+    #If the file does not exist, move it from the ADDD folder
+    if (-not(Test-Path -Path $destFolderPathFromConfig\$DODAAC.pdf -PathType Leaf)) {
+         try {
+             Move-Item -Path $addFolderPathFromConfig\$DODAAC.pdf -Destination $destFolderPathFromConfig\$DODAAC.pdf
+             Write-Host "No existing file. So it has been moved from ADDD to the corresponding brigade folder!"
+        }
+         catch {
+             throw $_.Exception.Message
+        }
     }
+    # If the file already exists, move the existing file to ARCHIVE folder and then move the file from the ADDD folder
     else {
-        $dodaacPathToPdf = $dataSet.Tables[0].rows[0]["DodaacPath"]  
-        Invoke-Item $dodaacPathToPdf
-    }    
+            $underscore='_'
+            $DODAACWithTimeStamp = $DODAAC + $underscore + (Get-Date).tostring("dd-MM-yyyy-hh-mm-ss")
+            Move-Item -Path $destFolderPathFromConfig\$DODAAC.pdf -Destination $archiveFolderPathFromConfig\$DODAACWithTimeStamp.pdf
+            Move-Item -Path $addFolderPathFromConfig\$DODAAC.pdf -Destination $destFolderPathFromConfig\$DODAAC.pdf        
+            Write-Host "File exists. Old filed moved to ARCHIVE and new file moved from ADDD to corresponding brigade folder!"
+     }
 }
 
 ###### Function to get path to pdf and delete pdf ######
 function deleteDodaacPdf
 {
-    [CmdletBinding()]
+    #[CmdletBinding()]
     $sqlCommand = New-Object System.Data.SqlClient.SqlCommand
     $sqlCommand.Connection = $sqlConnection
     #$sqlCommand.CommandTimeout = 600000
@@ -530,7 +579,7 @@ function deleteDodaacPdf
 ###### Function to check if the entered DODAAC is valid and if it corresponds to the right brigade ######
 function checkIfValidDodaac
 {
-    [CmdletBinding()]
+    #[CmdletBinding()]
     $sqlCommand = New-Object System.Data.SqlClient.SqlCommand
     $sqlCommand.Connection = $sqlConnection
     $getPathQuery = “SELECT DodaacPath FROM dbo.StockControlCustData sc  WHERE sc.DodaacId IN (SELECT DodaacId FROM  StockControlCustData sc1 WHERE sc1.DodaacId = '$DODAAC' AND sc1.BrigadeName LIKE '$brigade%' AND sc1.IsValid = 'Y')”
