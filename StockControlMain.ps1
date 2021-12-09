@@ -95,7 +95,7 @@ function viewAddDelSCMenu
 ###### OPTION 1 - Function to display the Stock Control View Menu ######
 function showStockControlViewMenu
 {
-    #[CmdletBinding()]
+    [CmdletBinding()]
     param (
         [string]$Title = 'Welcome to the Stock Control'
     )
@@ -207,7 +207,7 @@ function showStockControlViewMenu
 ###### OPTION 2 - Function to display the Stock Control Add Menu ######
 function showStockControlAddMenu
 {
-    #[CmdletBinding()]
+    [CmdletBinding()]
     param (
         [string]$Title = 'Welcome to the Stock Control'
     )
@@ -320,7 +320,7 @@ function showStockControlAddMenu
 ###### OPTION 3 - Function to display the Stock Control Delete Menu ######
 function showStockControlDeleteMenu
 {
-    #[CmdletBinding()]
+    [CmdletBinding()]
     param (
         [string]$Title = 'Welcome to the Stock Control'
     )
@@ -432,7 +432,7 @@ function showStockControlDeleteMenu
 ###### OPTION 4 - Function to generate a consolidated customer report in HTML format ######
 function generateCustomerReportAsHtml
 {
-    #[CmdletBinding()]
+    [CmdletBinding()]
     $sqlCommand = New-Object System.Data.SqlClient.SqlCommand
     $sqlCommand.Connection = $sqlConnection
     $getPathQuery = “SELECT BrigadeName AS 'Brigade Name', DodaacId AS 'DODAAC Id', DodaacPath AS 'File Path' FROM dbo.StockControlCustData ORDER BY BrigadeName ASC”
@@ -453,7 +453,7 @@ function generateCustomerReportAsHtml
 ###### OPTION 5 - Function to generate a consolidated customer report in CSV format ######
 function generateCustomerReportAsCsv
 {
-    #[CmdletBinding()]
+    [CmdletBinding()]
     $sqlCommand = New-Object System.Data.SqlClient.SqlCommand
     $sqlCommand.Connection = $sqlConnection
     $getPathQuery = “SELECT BrigadeName AS 'Brigade Name', DodaacId AS 'DODAAC Id', DodaacPath AS 'File Path', IsValid as 'Is it Valid?' FROM dbo.StockControlCustData ORDER BY BrigadeName ASC”
@@ -474,7 +474,7 @@ function generateCustomerReportAsCsv
 ###### Function to get path to pdf and VIEW pdf ######
 function viewDodaacPdf
 {
-    #[CmdletBinding()]
+    [CmdletBinding()]
     $sqlCommand = New-Object System.Data.SqlClient.SqlCommand
     $sqlCommand.Connection = $sqlConnection
     $getPathQuery = “SELECT DodaacPath FROM dbo.StockControlCustData WHERE DodaacId='$DODAAC' and IsValid='Y'”
@@ -496,7 +496,7 @@ function viewDodaacPdf
 ###### Function to get path to pdf and ADD pdf ######
 function addDodaacPdf
 {
-    #[CmdletBinding()]
+    [CmdletBinding()]
     $sqlCommand = New-Object System.Data.SqlClient.SqlCommand
     $sqlCommand.Connection = $sqlConnection
     
@@ -567,7 +567,7 @@ function addDodaacPdf
 ###### Function to get path to pdf and delete pdf ######
 function deleteDodaacPdf
 {
-    #[CmdletBinding()]
+    [CmdletBinding()]
     $sqlCommand = New-Object System.Data.SqlClient.SqlCommand
     $sqlCommand.Connection = $sqlConnection
     #$sqlCommand.CommandTimeout = 600000
@@ -579,7 +579,7 @@ function deleteDodaacPdf
 ###### Function to check if the entered DODAAC is valid and if it corresponds to the right brigade ######
 function checkIfValidDodaac
 {
-    #[CmdletBinding()]
+    [CmdletBinding()]
     $sqlCommand = New-Object System.Data.SqlClient.SqlCommand
     $sqlCommand.Connection = $sqlConnection
     $getPathQuery = “SELECT DodaacPath FROM dbo.StockControlCustData sc  WHERE sc.DodaacId IN (SELECT DodaacId FROM  StockControlCustData sc1 WHERE sc1.DodaacId = '$DODAAC' AND sc1.BrigadeName LIKE '$brigade%' AND sc1.IsValid = 'Y')”
